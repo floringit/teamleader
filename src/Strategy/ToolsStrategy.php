@@ -42,7 +42,7 @@ class ToolsStrategy implements DiscountStrategyContract {
         return $order->total && count($this->filteredProducts) >= TOOLS_MIN_QUANTITY;
     }
 
-    public function setDiscount(Order &$order): void {
+    public function setDiscount(Order $order): void {
         $this->filterProducts($order);
         if ($this->shouldApply($order)) {
             $amount = $this->cheapestPrice * TOOLS_DISCOUNT_PERCENTAGE;

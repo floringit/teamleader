@@ -17,7 +17,7 @@ class TotalRevenueStrategy implements DiscountStrategyContract {
         return $order->total && $order->customer->get('revenue') > MIN_REVENUE_AMOUNT;
     }
 
-    public function setDiscount(Order &$order): void {
+    public function setDiscount(Order $order): void {
         if ($this->shouldApply($order)) {
             $amount = $order->total * DISCOUNT_PERCENTAGE;
             $order->addDiscount(new Discount($amount, DISCOUNT_CODE));

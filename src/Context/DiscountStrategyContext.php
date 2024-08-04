@@ -14,7 +14,7 @@ class DiscountStrategyContext {
         $this->strategies[] = $strategy;
     }
 
-    public function setDiscounts(Order &$order): void {
+    public function setDiscounts(Order $order): void {
         foreach ($this->strategies as $strategy) {
             $strategy->setDiscount($order);
         }

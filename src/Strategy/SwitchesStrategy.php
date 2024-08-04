@@ -30,7 +30,7 @@ class SwitchesStrategy implements DiscountStrategyContract {
         return $order->total && count($this->filteredProducts) > 0;
     }
 
-    public function setDiscount(Order &$order): void {
+    public function setDiscount(Order $order): void {
         $this->filterProducts($order);
         if ($this->shouldApply($order)) {
             $amount = 0;
