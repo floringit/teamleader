@@ -23,8 +23,17 @@ final class DiscountController
 
     public function index(Request $request, Response $response): Response
     {
-        $order = $this->orderTransformer->transform($request->getParsedBody());
-        $this->discountStrategyContext->setDiscounts($order);
+        $body = $request->getParsedBody();
+        if (!$body) {
+            return $response->withJson([]);
+        }
+
+        try {
+            $order = $this->orderTransformer->transform($body);
+            $this->discountStrategyContext->setDiscounts($order);
+        } catch (\Exception $e) {
+            return $response->withJson([]);
+        }
 
         return $response->withJson($order->toArray());
     }
