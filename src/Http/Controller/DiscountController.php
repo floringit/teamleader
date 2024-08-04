@@ -23,17 +23,7 @@ final class DiscountController
 
     public function index(Request $request, Response $response): Response
     {
-        $body = [
-            'customer-id' => 2,
-            'items' => [
-                ['product-id' => 'A101', 'quantity' => 3, 'unit-price' => 9.75, 'total' => 19.5],
-                ['product-id' => 'A102', 'quantity' => 1, 'unit-price' => 49.5, 'total' => 49.5],
-                ['product-id' => 'B101', 'quantity' => 11, 'unit-price' => 4.99, 'total' => 54.89],
-                ['product-id' => 'B102', 'quantity' => 7, 'unit-price' => 4.99, 'total' => 34.93]
-            ]
-        ];
-
-        $order = $this->orderTransformer->transform($body);
+        $order = $this->orderTransformer->transform($request->getParsedBody());
         $this->discountStrategyContext->setDiscounts($order);
 
         return $response->withJson($order->toArray());
