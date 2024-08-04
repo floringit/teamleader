@@ -30,10 +30,16 @@ PHP REST microservice built with the Slim 4 framework. The microservice implemen
    composer install
    ```
 
-3. Set up the local development server:
+3. Migrate and seed DB:
 
    ```bash
-   php -S localhost:8080 -t public
+   composer db:reset
+   ```
+
+4. Set up the local development server:
+
+   ```bash
+   composer start
    ```
 
 ## Usage
